@@ -1,9 +1,9 @@
 prodact :
   - name
   -  flag [new , sela , feature]
-  - image , images 
+  - image , images (colon)
   - price
-  - reviews
+  - reviews (colon)
   - subttitel 
   - tag 
   - brand 
