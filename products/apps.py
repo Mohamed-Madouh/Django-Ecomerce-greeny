@@ -3,4 +3,4 @@ from django.apps import AppConfig
 
 class ProdyctsConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'prodycts'
+    name = 'products'
