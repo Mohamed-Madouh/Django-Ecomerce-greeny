@@ -22,6 +22,14 @@ class product(models.Model):
     brand=models.ForeignKey('brand',verbose_name=_('brand'),related_name='product_brand',on_delete=models.SET_NULL, null=True,blank=True)
     def __str__(self) :
        return self.name
+class ProdactReviews(models.Model):
+    user = models.ForeignKey (User , related_name='user_review', on_delete=models.SET_NULL ,null=True, blank=True)
+    product= models.ForeignKey(product, verbose_name=_("product"),related_name='Prodact_review', on_delete=models.SET_NULL,null =True,blank =True)
+    rate =models.IntegerField(verbose_name=('rate'))
+    review =models.CharField(verbose_name=('review'),max_length=300)
+    created_at =models.DateTimeField(default=timezone.now)
+    def __str__(self) -> str:
+        return str(self.product)
 class Category(models.Model):
     name = models.CharField(_('name'),max_length=100 , )
     image = models.ImageField(_('image'),upload_to='Category')
@@ -33,16 +41,8 @@ class Brand(models.Model):
     image = models.ImageField(_('image'),upload_to='brand')
     def __str__(self) :
        return self.name
-class ProdactImages(models.Model):
-     image = models.ImageField(_('image'),upload_to='ProdactImages')
-     product = models.ForeignKey(product,verbose_name=_('product'),related_name='Prodact_images', on_delete=models.CASCADE)
-     def __str__(self) -> str:
-       return str(self.product)
-class ProdactReviews(models.Model):
-      user = models.ForeignKey (User , related_name='user_review', on_delete=models.SET_NULL ,null=True, blank=True)
-      product= models.ForeignKey(product, verbose_name=_("product"),related_name='Prodact_review', on_delete=models.SET_NULL,null =True,blank =True)
-      rate =models.IntegerField(verbose_name=('rate'))
-      review =models.CharField(verbose_name=('review'),max_length=300)
-      created_at =models.DateTimeField(default=timezone.now)
-      def __str__(self) -> str:
+class Productimages(models.Model):
+    image = models.ImageField(_('image'),upload_to='Productimages')
+    product = models.ForeignKey(product,verbose_name=_('product'),related_name='Product_images', on_delete=models.CASCADE)
+    def __str__(self) -> str:
        return str(self.product)
