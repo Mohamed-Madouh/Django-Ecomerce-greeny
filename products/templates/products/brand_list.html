@@ -1,5 +1,10 @@
-{% extends 'bess.html' %} 
+{% extends 'bess.html' %}
 {% block bady %}
+{% load static %}
+
+{% block static %}
+  <link rel="stylesheet" href="{% static 'css/brand-list.css' %}">
+{% endblock static %} 
     <!--=====================================
                     BANNER PART START
         =======================================-->

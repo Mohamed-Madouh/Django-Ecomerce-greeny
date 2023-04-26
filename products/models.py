@@ -3,6 +3,7 @@ from django.utils.translation import gettext as _
 from django.utils import timezone  #import time zone
 from django.contrib.auth.models import User 
 from taggit.managers import TaggableManager
+from django.db.models.aggregates import Max ,Min,Avg ,Sum
 # Create your models here.
 PRODUCT_FLAG={
     ('New','New'),
@@ -21,8 +22,13 @@ class product(models.Model):
     category=models.ForeignKey('Category',verbose_name=_('Category'),related_name='product_catrgory',on_delete=models.SET_NULL, null=True,blank=True)
     video_url = models.URLField (null=True,blank=True)  
     brand=models.ForeignKey('Brand',verbose_name=_('brand'),related_name='product_brand',on_delete=models.SET_NULL, null=True,blank=True)
+    Quantity= models.IntegerField(default=50)
     def __str__(self) :
        return self.name
+    def get_avg(self):
+        avg = self.Prodact_review.aggregate(myavg= Avg("rate"))
+        return avg
+       
 class Productimages(models.Model):
     image = models.ImageField(_('image'),upload_to='Productimages')
     product = models.ForeignKey(product,verbose_name=_('product'),related_name='Product_images', on_delete=models.CASCADE)
