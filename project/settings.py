@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'orders',
     'settings',
     "debug_toolbar",
+    'django_countries',
     ]
 
 MIDDLEWARE = [
@@ -142,3 +143,4 @@ INTERNAL_IPS = [
     "127.0.0.1",
     # ...
 ]
+AUTHENTICATION_BACKENDS = ['accounts.backends.EmailBackend']
