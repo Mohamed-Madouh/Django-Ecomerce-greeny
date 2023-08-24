@@ -13,6 +13,8 @@ class Profile (models.Model):
     code = models.CharField(max_length=10 , default=grnerate_code)
     code_used = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
+    def __str__(self):
+        return str(self.user)
 
 
 @receiver(post_save,sender=User)
@@ -40,4 +42,8 @@ class UserAddress(models.Model):
     region  = models.CharField(max_length=30)
     street = models.CharField(max_length=80)
     notes =  models.CharField(max_length=200)
+
+
+
+
         
