@@ -9,7 +9,6 @@ from django.db.models.signals import post_save
 class Profile (models.Model):
     user=models.OneToOneField(User , related_name='user_profile' , on_delete=models.CASCADE)
     image = models.ImageField(upload_to='users/')
-    
     code = models.CharField(max_length=10 , default=grnerate_code)
     code_used = models.BooleanField(default=False)
     active = models.BooleanField(default=False)
