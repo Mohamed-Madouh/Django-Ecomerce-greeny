@@ -8,3 +8,13 @@ class Signupform(UserChangeForm):
      class Meta:
          model = User
          fields = ['username','email','password',]
+
+
+
+
+
+
+
+
+class UserActivateForm(forms.Form):
+    code = forms.CharField(max_length=8)
