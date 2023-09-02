@@ -2,6 +2,7 @@ from django.shortcuts import render , redirect
 from django.core.mail import send_mail
 from .forms import Signupform ,UserActivateForm
 from .models import Profile
+from django.contrib.auth.models import User
 
 
 # Create your views here.
@@ -14,7 +15,8 @@ def singnup(request):
             
             username= form.cleaned_data['username']
             email= form.cleaned_data['email']
-            form.save()
+            password= form.cleaned_data['password1']
+            myform =form.save()
             
             profile = Profile.objects.get(user__username=username)
             profile.active=False
@@ -22,16 +24,23 @@ def singnup(request):
             #send email
             send_mail(
                 subject="Activate Your Account",
-                message=f"use this code {{profile.code}} to activate your account .",
+                message=f"use this code {profile.code} to activate your account .",
                 from_email="mm9073595@gmail.com",
                 recipient_list=[email],
                 fail_silently=False
             )
-            return redirect(f'/account/{username}/activate')
+            return redirect(f'/accounts/{username}/activate')
     else:
         form = Signupform()
     return render(request,'registration/signup.html',{'form' :form})
      
+     
+     
+     
+     
+     
+     
+      
 def user_activate(request,username):
     profile = Profile.objects.get(user__username=username)
     if request.method == 'POST':
@@ -42,7 +51,7 @@ def user_activate(request,username):
                profile.active = True
                profile.code =''
                profile.code_used = True
-               return redirect('/account/login')
+               return redirect('/accounts/login')
             
         
     else:
