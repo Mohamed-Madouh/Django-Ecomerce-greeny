@@ -62,8 +62,8 @@ def user_activate(request,username):
 
 
 def profile(request): 
-    
-    return render(request,'profile/profile.html',{'Profile':profile})
+    profile = Profile.objects.get(user = request.user)
+    return render(request,'registration/profile.html',{'Profile':profile})
  
      
 def profile_edit(request):
