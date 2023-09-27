@@ -1,7 +1,7 @@
 from django.shortcuts import render , redirect
 from django.core.mail import send_mail
 from .forms import Signupform ,UserActivateForm
-from .models import Profile
+from .models import Profile , UserAddress ,UserPhoneNumber
 from django.contrib.auth.models import User
 
 
@@ -63,7 +63,9 @@ def user_activate(request,username):
 
 def profile(request): 
     profile = Profile.objects.get(user = request.user)
-    return render(request,'registration/profile.html',{'Profile':profile})
+    User_Address = UserAddress.objects.filter(user=request.user)
+    PhoneNumber = UserPhoneNumber.objects.filter(user=request.user)
+    return render(request,'registration/profile.html',{'Profile':profile ,'User_Address':User_Address ,'PhoneNumber':PhoneNumber})
  
      
 def profile_edit(request):
